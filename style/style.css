@@ -1,0 +1,25 @@
+html{
+    background-color: white;
+    font-family: 'lacuna', 'Courier New', sans-serif;
+    color: white;
+    text-align: center;
+}
+/* CUSTOM FONT */
+@font-face {
+    font-family: 'lacuna';
+    src: url('/style/webfontkit/lacurg__-webfont.ttf') format('ttf'),
+         url('/style/webfontkit/lacurg__-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body{
+    background-color: white;
+}
+.h1{
+    text-align: center;
+    font-size: 400%;
+    background-color: white;
+    color: white;
+    font-family: 'lacuna', 'Courier New', sans-serif;
+}
