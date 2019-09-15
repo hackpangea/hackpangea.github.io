@@ -67,6 +67,7 @@
         }
 
         #pac-container {
+        padding-top: 50px;
         padding-bottom: 12px;
         margin-right: 12px;
         }
@@ -116,7 +117,7 @@
 
   <body>
     <div id="floating-panel">
-      <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+      <button onclick="toggleHeatmap()">Markers</button>
       <button onclick="changeGradient()">Change gradient</button>
       <button onclick="changeRadius()">Change radius</button>
       <button onclick="changeOpacity()">Change opacity</button>
@@ -128,7 +129,44 @@
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
 
-      var map, heatmap;
+        var map, heatmap;
+        var latin_america =
+        {“Latin America”:[
+        {“Restaurants”: {
+            (42.377130, -71.033310): [‘Lollys Bakery’, ‘158 Bennington St, Boston’],
+            (42.377130, -71.033310): [‘Lollys Bakery’, ‘158 Bennington St, Boston’],
+            (42.409210, -71.012700): [‘Lorena’s 3 Leches Cakes’, ‘341 Broadway, Revere’]
+        },
+        “Grocery”: {
+            (42.370780, -71.233560): [‘Aztecs Market’, ’75 Pine St, Waltham’], 
+            (42.373060, -71.243118): [‘Cruz Market’, ‘139 Felton St, Waltham’],
+            (42.375250, -71.234280): [‘Despensa Familiar’, ’34 Elm St, Waltham’],
+            (42.368990, -71.237080): [‘La Chapincitita Market’, ‘424 Moody St, Waltham’],
+            (42.353970, -71.132010): [‘La Favorita Market’, ’66 Harvard Ave, Allston’],
+            (42.415020, -71.048570): [‘La Sultana Bakery’, ‘716 Broadway, Everett’],
+            (42.391820, -71.092420): [‘La Sultana Bakery’, ‘290 Broadway, Somerville’],
+            (42.376690, -71.039390): [‘Latino’s Market’, ‘286 Meridian St, East Boston’],
+            (42.325980, -71.105070): [‘Medina Market’, ‘186 Health St, Boston’]
+        },
+        “Community Centers”: {(44.477631, -77.677467): [‘Latino Student Cultural Center’, ’104 Forsyth St, Boston’]},
+        “Embassy”: {(42.35757, -71.13285): [‘Consulate General of Mexico’, ’55 Franklin St, Boston’]}
+        }
+        ]};
+
+    var any_culture = {};
+        any_culture =
+            {“Any”:
+                {“Community Centers”: {
+                    (42.332249, -71.098244): [‘Boston Center-Youth and Families’, ’1483 Tremont St, Boston’],
+                    (42.340328, -71.073112): [‘Blackstone Community Center’, ’50 W Brookline St, Blackstone’],
+                    (42.32551, -71.0593): [‘Fenway Community Center’, ‘1282 Boston St #123, Boston’]
+                },
+            “Immigration Services”: {
+                (38.65265, -78.66871): [‘ACLU’, ‘211 Congress St, Boston’],
+                (51.10955, 0.92175): [‘Visa Service, Inc’, ‘535 Bolyston St 5th floor’]
+                }
+            }
+        };
       function initAutocomplete() {
         // var map = new google.maps.Map(document.getElementById('map'), {
         //     center: {lat: -33.8688, lng: 151.2195},
@@ -271,6 +309,74 @@
  
             function toggleHeatmap() {
                 heatmap.setMap(heatmap.getMap() ? null : map);
+                for (var key in latin_america.keys()) { 
+                    var contentString = '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+                    '<div id="bodyContent">'+
+                    '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+                    'sandstone rock formation in the southern part of the '+
+                    'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+                    'south west of the nearest large town, Alice Springs; 450&#160;km '+
+                    '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+                    'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+                    'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+                    'Aboriginal people of the area. It has many springs, waterholes, '+
+                    'rock caves and ancient paintings. Uluru is listed as a World '+
+                    'Heritage Site.</p>'+
+                    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+                    'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+                    '(last visited June 22, 2009).</p>'+
+                    '</div>'+
+                    '</div>';
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+
+                    var marker = new google.maps.Marker({
+                        position: {lat: 42.35242, lng:-71.12533},
+                        map: map,
+                        title: 'Name of Store'
+                    });
+                    marker.addListener('click', function() {
+                        infowindow.open(map, marker);
+                    });
+                }
+                var contentString = '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+                    '<div id="bodyContent">'+
+                    '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+                    'sandstone rock formation in the southern part of the '+
+                    'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+                    'south west of the nearest large town, Alice Springs; 450&#160;km '+
+                    '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+                    'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+                    'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+                    'Aboriginal people of the area. It has many springs, waterholes, '+
+                    'rock caves and ancient paintings. Uluru is listed as a World '+
+                    'Heritage Site.</p>'+
+                    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+                    'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+                    '(last visited June 22, 2009).</p>'+
+                    '</div>'+
+                    '</div>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                var marker = new google.maps.Marker({
+                    position: {lat: 42.35242, lng:-71.12533},
+                    map: map,
+                    title: 'Name of Store'
+                });
+                marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                });
             }
 
             function changeGradient() {
