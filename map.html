@@ -131,42 +131,23 @@
 
         var map, heatmap;
         var latin_america =
-        {“Latin America”:[
-        {“Restaurants”: {
-            (42.377130, -71.033310): [‘Lollys Bakery’, ‘158 Bennington St, Boston’],
-            (42.377130, -71.033310): [‘Lollys Bakery’, ‘158 Bennington St, Boston’],
-            (42.409210, -71.012700): [‘Lorena’s 3 Leches Cakes’, ‘341 Broadway, Revere’]
-        },
-        “Grocery”: {
-            (42.370780, -71.233560): [‘Aztecs Market’, ’75 Pine St, Waltham’], 
-            (42.373060, -71.243118): [‘Cruz Market’, ‘139 Felton St, Waltham’],
-            (42.375250, -71.234280): [‘Despensa Familiar’, ’34 Elm St, Waltham’],
-            (42.368990, -71.237080): [‘La Chapincitita Market’, ‘424 Moody St, Waltham’],
-            (42.353970, -71.132010): [‘La Favorita Market’, ’66 Harvard Ave, Allston’],
-            (42.415020, -71.048570): [‘La Sultana Bakery’, ‘716 Broadway, Everett’],
-            (42.391820, -71.092420): [‘La Sultana Bakery’, ‘290 Broadway, Somerville’],
-            (42.376690, -71.039390): [‘Latino’s Market’, ‘286 Meridian St, East Boston’],
-            (42.325980, -71.105070): [‘Medina Market’, ‘186 Health St, Boston’]
-        },
-        “Community Centers”: {(44.477631, -77.677467): [‘Latino Student Cultural Center’, ’104 Forsyth St, Boston’]},
-        “Embassy”: {(42.35757, -71.13285): [‘Consulate General of Mexico’, ’55 Franklin St, Boston’]}
-        }
-        ]};
+        {"Restaurants": [[(42.377130,-71.033310),"Lolly's Bakery", "158 Bennington St., Boston"]]}
 
-    var any_culture = {};
-        any_culture =
-            {“Any”:
-                {“Community Centers”: {
-                    (42.332249, -71.098244): [‘Boston Center-Youth and Families’, ’1483 Tremont St, Boston’],
-                    (42.340328, -71.073112): [‘Blackstone Community Center’, ’50 W Brookline St, Blackstone’],
-                    (42.32551, -71.0593): [‘Fenway Community Center’, ‘1282 Boston St #123, Boston’]
-                },
-            “Immigration Services”: {
-                (38.65265, -78.66871): [‘ACLU’, ‘211 Congress St, Boston’],
-                (51.10955, 0.92175): [‘Visa Service, Inc’, ‘535 Bolyston St 5th floor’]
-                }
-            }
-        };
+
+    // var any_culture = {};
+    //     any_culture =
+    //         {“Any”:
+    //             {“Community Centers”: {
+    //                 (42.332249, -71.098244): [‘Boston Center-Youth and Families’, ’1483 Tremont St, Boston’],
+    //                 (42.340328, -71.073112): [‘Blackstone Community Center’, ’50 W Brookline St, Blackstone’],
+    //                 (42.32551, -71.0593): [‘Fenway Community Center’, ‘1282 Boston St #123, Boston’]
+    //             },
+    //         “Immigration Services”: {
+    //             (38.65265, -78.66871): [‘ACLU’, ‘211 Congress St, Boston’],
+    //             (51.10955, 0.92175): [‘Visa Service, Inc’, ‘535 Bolyston St 5th floor’]
+    //             }
+    //         }
+    //     };
       function initAutocomplete() {
         // var map = new google.maps.Map(document.getElementById('map'), {
         //     center: {lat: -33.8688, lng: 151.2195},
@@ -309,7 +290,7 @@
  
             function toggleHeatmap() {
                 heatmap.setMap(heatmap.getMap() ? null : map);
-                for (var key in latin_america.keys()) { 
+                for (var key in latin_america) { 
                     var contentString = '<div id="content">'+
                     '<div id="siteNotice">'+
                     '</div>'+
