@@ -15,6 +15,25 @@
         margin: 0;
         padding: 0;
       }
+      input.chk-btn {
+      display: none;
+      }
+      input.chk-btn + label {
+        border: 1px solid grey;
+        background: ghoswhite;
+        padding: 5px 8px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      input.chk-btn:not(:checked) + label:hover {
+        box-shadow: 0px 1px 3px;
+      }
+      input.chk-btn + label:active,
+      input.chk-btn:checked + label {
+        box-shadow: 0px 0px 3px inset;
+        background: #8cc472;
+        
+      }
       #floating-panel {
         position: absolute;
         top: 10px;
@@ -121,6 +140,18 @@
       <button onclick="changeGradient()">Change gradient</button>
       <button onclick="changeRadius()">Change radius</button>
       <button onclick="changeOpacity()">Change opacity</button>
+      <input type="checkbox" name="filter" id="restaurants" class='chk-btn'>
+      <label for='restaurants'>Restaurants</label>
+      <input type="checkbox" name="filter" id="GroceryStores" class='chk-btn'>
+      <label for='GroceryStores'>Grocery Stores</label>
+      <input type="checkbox" name="filter" id="CulturalCenters" class='chk-btn'>
+      <label for='CulturalCenters'>Cultural Centers</label>
+      <input type="checkbox" name="filter" id="ImmigrationResources" class='chk-btn'>
+      <label for='ImmigrationResources'>Immigration Resources</label>
+      <input type="checkbox" name="filter" id="EastAsian" class='chk-btn'>
+      <label for='EastAsian'>East Asian</label>
+      <input type="checkbox" name="filter" id="LatinAmerican" class='chk-btn'>
+      <label for='LatinAmerican'>Latin American</label>
     </div>
     <div id="map"></div>
     <script>
@@ -132,7 +163,8 @@
         var map, heatmap;
         var latin_america =
         {"Restaurants": [[(42.377130,-71.033310),"Lolly's Bakery", "158 Bennington St., Boston"]]}
-
+        var filters = {LatinAmerican: false, EastAsian: false, Restaurants: false, GroceryStores: false, 
+        CulturalCenters: false, ImmigrationResources: false}
 
     // var any_culture = {};
     //     any_culture =
