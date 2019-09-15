@@ -4,14 +4,22 @@
         <meta charset="utf-8">
         <title>pangea</title>
         <link rel="stylesheet" type="text/css" href="/style/style.css">
-
+    <style>
+        .bg-image {
+            height: 100%; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-filter: brightness(75%); 
+            filter: brightness(75%);
+        }
+        .img1 { background-image: url("images/pangea.jpg");}
+    </style>
     </head>
 
-    <body background="images/pangea.jpg">
+    <body>
         <h1>PANGEA</h1>
-        <button type="button" onclick="window.location.href='https://hackpangea.github.io/map'">Click here for interactive map</button>
+        <a href='https://hackpangea.github.io/map'><button>Go to map</button></a>
+        <div class="bg-image img1"></div>
     </body>
-    <form>
-        <input class="MyButton" type="button" value="Click Here for Interactive Map" onclick="window.location.href='https://hackpangea.github.io/map'" />
-    </form>
 </html>
