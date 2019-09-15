@@ -5,6 +5,11 @@
         <title>pangea</title>
         <link rel="stylesheet" type="text/css" href="/style/style.css">
     <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: "lacuna", 'Calibri', sans-serif;
+        }
         .bg-image {
             height: 100%; 
             background-position: center;
@@ -14,12 +19,35 @@
             filter: brightness(75%);
         }
         .img1 { background-image: url("images/pangea.jpg");}
+        .bg-h1 {
+            color: white;
+            font-weight: bold;
+            font-size: 80px;
+            position: fixed;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            padding: 20px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .btn {
+            border: none;
+            outline: none;
+            padding: 10px 16px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+        }
     </style>
     </head>
 
     <body>
-        <h1>PANGEA</h1>
-        <a href='https://hackpangea.github.io/map'><button>Go to map</button></a>
+        <div class="bg-h1">PANGEA</div>
         <div class="bg-image img1"></div>
+        <div class="button"></div>
+        <a href='https://hackpangea.github.io/map'><button>Go to map</button></a>
     </body>
 </html>
