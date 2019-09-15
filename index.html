@@ -32,14 +32,22 @@
             text-align: center;
             white-space: nowrap;
         }
-        .btn {
+        .bg-image .img1 .btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%,-50%);
+            background-color: #555;
+            color: white;
+            padding: 12px 24px;
             border: none;
             outline: none;
             padding: 10px 16px;
             background-color: #f1f1f1;
             cursor: pointer;
             font-size: 18px;
-            border-radius: 50%;
+            border-radius: 5px;
         }
     </style>
     </head>
@@ -47,7 +55,8 @@
     <body>
         <div class="bg-h1">PANGEA</div>
         <div class="bg-image img1"></div>
-        <div class="button"></div>
-        <a href='https://hackpangea.github.io/map'><button>Go to map</button></a>
+            <button class="button"></button>Go to map></button>
+        </div>
+        <!-- <a href='https://hackpangea.github.io/map'><button>Go to map</button></a> -->
     </body>
 </html>
