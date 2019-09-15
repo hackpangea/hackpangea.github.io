@@ -140,18 +140,24 @@
       <button onclick="changeGradient()">Change gradient</button>
       <button onclick="changeRadius()">Change radius</button>
       <button onclick="changeOpacity()">Change opacity</button>
-      <input type="checkbox" name="filter" id="restaurants" class='chk-btn'>
+      <button onclick="changeState('Restaurants')">Restaurants</button>
+      <button onclick="changeState('GroceryStores')">Grocery Stores</button>
+      <button onclick="changeState('CommunityCenters')">Community Centers</button>
+      <button onclick="changeState('ImmigrationResources')">Immigration Resources</button>
+      <button onclick="changeState('EastAsian')">East Asian</button>
+      <button onclick="changeState('LatinAmerican')">Latin American</button>
+      <!-- <input type="checkbox" name="filter" id="Restaurants" class='chk-btn'>
       <label for='restaurants'>Restaurants</label>
       <input type="checkbox" name="filter" id="GroceryStores" class='chk-btn'>
       <label for='GroceryStores'>Grocery Stores</label>
-      <input type="checkbox" name="filter" id="CulturalCenters" class='chk-btn'>
-      <label for='CulturalCenters'>Cultural Centers</label>
+      <input type="checkbox" name="filter" id="CommunityCenters" class='chk-btn'>
+      <label for='CommunityCenters'>Community Centers</label>
       <input type="checkbox" name="filter" id="ImmigrationResources" class='chk-btn'>
       <label for='ImmigrationResources'>Immigration Resources</label>
       <input type="checkbox" name="filter" id="EastAsian" class='chk-btn'>
       <label for='EastAsian'>East Asian</label>
       <input type="checkbox" name="filter" id="LatinAmerican" class='chk-btn'>
-      <label for='LatinAmerican'>Latin American</label>
+      <label for='LatinAmerican'>Latin American</label> -->
     </div>
     <div id="map"></div>
     <script>
@@ -162,75 +168,61 @@
 
         var map, heatmap;
         var latin_america =
-        {"Restaurants": [[(42.377130,-71.033310),"Lolly's Bakery", "158 Bennington St., Boston"], [(42.409210,-71.012700), "Lorena's 3 Leches Cakes", "345 Broadway, Revere"]], 
-        "Grocery": [[(42.370780, -71.233560),"Aztecs Market", "75 Pine St, Waltham"], [(42.373060, -71.243118), "Cruz Market", "139 Felton St, Waltham"],[(42.375250, -71.234280),"Despensa Familiar","34 Elm St, Waltham"],[(42.368990, -71.237080), "La Chapincitita Market", "424 Moody St, Waltham"],[(42.353970, -71.132010),"La Favorita Market", "66 Harvard Ave, Allston"],[(42.415020, -71.048570), "La Sultana Bakery","716 Broadway, Everett"],[(42.376690, -71.039390),"Latino's Market", "286 Meridian St, East Boston"],[(42.325980, -71.105070),"Medina Market", "186 Health St, Boston"]],
-        "Community Centers":[[(44.477631, -77.677467),"Latino Student Cultural Center","104 Forsyth St, Boston"]],
-        "Embassy":[[(42.35757, -71.13285),"Consulate General of Mexico","55 Franklin St, Boston"]]
+        {"Restaurants": [[[42.377130,-71.033310],"Lolly's Bakery", "158 Bennington St., Boston"], [[42.409210,-71.012700], "Lorena's 3 Leches Cakes", "345 Broadway, Revere"]], 
+        "GroceryStores": [[[42.370780, -71.233560],"Aztecs Market", "75 Pine St, Waltham"], [[42.373060, -71.243118], "Cruz Market", "139 Felton St, Waltham"],[[42.375250, -71.234280],"Despensa Familiar","34 Elm St, Waltham"],[[42.368990, -71.237080], "La Chapincitita Market", "424 Moody St, Waltham"],[[42.353970, -71.132010],"La Favorita Market", "66 Harvard Ave, Allston"],[[42.415020, -71.048570], "La Sultana Bakery","716 Broadway, Everett"],[[42.376690, -71.039390],"Latino's Market", "286 Meridian St, East Boston"],[[42.325980, -71.105070],"Medina Market", "186 Health St, Boston"]],
+        "CommunityCenters":[[[44.477631, -77.677467],"Latino Student Cultural Center","104 Forsyth St, Boston"]],
+        "ImmigrationResources":[[[42.35757, -71.13285],"Consulate General of Mexico","55 Franklin St, Boston"]]
         };
         var any_culture= 
-        {"Community Centers":[[(42.332249, -71.098244),"Boston Center-Youth and Families","1483 Tremont St, Boston"],[(42.340328, -71.073112),"Blackstone Community Center","50 W Brookline St, Blackstone"], [(42.32551, -71.0593),"Fenway Community Center","1282 Boston St #123, Boston"]],
-        "Immigration Services": [[(38.65265, -78.66871),"ACLU","211 Congress St. Boston"],[(51.10955, 0.92175),"Visa Service, Inc","535 Boylston St 5th Floor, Boston"]]
+        {"CommunityCenters":[[[42.332249, -71.098244],"Boston Center-Youth and Families","1483 Tremont St, Boston"],[[42.340328, -71.073112],"Blackstone Community Center","50 W Brookline St, Blackstone"], [[42.32551, -71.0593],"Fenway Community Center","1282 Boston St #123, Boston"]],
+        "ImmigrationResources": [[[38.65265, -78.66871],"ACLU","211 Congress St. Boston"],[[51.10955, 0.92175],"Visa Service, Inc","535 Boylston St 5th Floor, Boston"]]
         };
         var East_Asia=
-
         {"Restaurants": 
-          [[(42.35151, -72.06052), '101 Bakery', '56 Beach St, Boston'], 
-          [(29.428350,-98.513100), 'Bad Bad Bakery', '1 Lakeside Rd, Eastwood'], 
-          [(42.366270, -71.079200), 'Chang Thing Tofu', '37 Rogers St, Cambridge'],
-          [(42.365640, -71.055970), 'Corner Cafe Bakery', '87 Prince St, Boston'],
-          [(42.351760, -71.060980), 'Eldo Cafe House', '36 Harrison Ave, Boston'],
-          [(42.350870, -71.060180), 'Happy Family Seafood', '11 Hudson St, unit A, Boston'],
-          [(42.351100, -71.060040), 'Hing Shing Pastry', '67 Beach St, Boston'],
-          [(42.351520, -71.060580), 'Ho Yuen Bakery', '54 Beach St, Boston'],
-          [(42.301890, -71.054840), 'Mei Sum', '36 Beach St, Boston'],
-          [(38.65265, -78.66871), 'Double Chin Modern Asian Restaurant', '86 Harrison Ave, Boston'],
-          [(42.35119, -7105984), 'New Golden Gate Seafood', '66 Beach St, Boston'],
-          [(42.35138, -71.06069), 'Gourmet Dumpling House', '52 Beach St, Boston'],
-          [(45.4260978987139, -96.410917239285), 'The Q', '660 Washington St, Boston'],
-          [(42.351103, -71.06079), 'Shojo', '9 Tyler St, Boston'],
-          [(42.350837, -71.060634), 'Shabu Zen', '16 Tyler, Boston'],
-          [(42.351491, -71.060128), 'Taiwan Cafe', '34 Oxford St, Boston'],
-          [(42.350931, -71.0602), 'New Jumbo Seafood Restaurant', '5 Hudson St, Boston'],
-          [(42.350979, -71.060478), 'Windsor Dim Sum Cafe', '10 Tyler St, Boston'],
-          [(42.35148, -71.060154), 'Ching King', '60 Beach St, Boston'],
-          [(42.350496, -71.060478), 'Clay Pot Cafe', '74 Kneeland St, Boston'],
-          [(42.347471, -71.062582), 'Chinatown Cafe', '262 Harrison Ave, Boston']],
+          [[[42.35151, -72.06052], '101 Bakery', '56 Beach St, Boston'], 
+          [[29.428350,-98.513100], 'Bad Bad Bakery', '1 Lakeside Rd, Eastwood'], 
+          [[42.366270, -71.079200], 'Chang Thing Tofu', '37 Rogers St, Cambridge'],
+          [[42.365640, -71.055970], 'Corner Cafe Bakery', '87 Prince St, Boston'],
+          [[42.351760, -71.060980], 'Eldo Cafe House', '36 Harrison Ave, Boston'],
+          [[42.350870, -71.060180], 'Happy Family Seafood', '11 Hudson St, unit A, Boston'],
+          [[42.351100, -71.060040], 'Hing Shing Pastry', '67 Beach St, Boston'],
+          [[42.351520, -71.060580], 'Ho Yuen Bakery', '54 Beach St, Boston'],
+          [[42.301890, -71.054840], 'Mei Sum', '36 Beach St, Boston'],
+          [[38.65265, -78.66871], 'Double Chin Modern Asian Restaurant', '86 Harrison Ave, Boston'],
+          [[42.35119, -7105984], 'New Golden Gate Seafood', '66 Beach St, Boston'],
+          [[42.35138, -71.06069], 'Gourmet Dumpling House', '52 Beach St, Boston'],
+          [[45.4260978987139, -96.410917239285], 'The Q', '660 Washington St, Boston'],
+          [[42.351103, -71.06079], 'Shojo', '9 Tyler St, Boston'],
+          [[42.350837, -71.060634], 'Shabu Zen', '16 Tyler, Boston'],
+          [[42.351491, -71.060128], 'Taiwan Cafe', '34 Oxford St, Boston'],
+          [[42.350931, -71.0602], 'New Jumbo Seafood Restaurant', '5 Hudson St, Boston'],
+          [[42.350979, -71.060478], 'Windsor Dim Sum Cafe', '10 Tyler St, Boston'],
+          [[42.35148, -71.060154], 'Ching King', '60 Beach St, Boston'],
+          [[42.350496, -71.060478], 'Clay Pot Cafe', '74 Kneeland St, Boston'],
+          [[42.347471, -71.062582], 'Chinatown Cafe', '262 Harrison Ave, Boston']],
 
           
-        "Grocery":
-              [[(42.35242, -71.12533), '88 Supermarket', '1 Brighton Ave, Boston'],
-              [(42.63465, -71.32739), '888 Asian Grocery', '4 Pine St, Lowell'],
-              [(42.35195, -71.06146), 'A Goomart', '15 Harrison Ave, Boston'],
-              [(42.348010, -71.062770), ' Asian Pacific Seafood Trading Co Inc', '216 Harrison Ave, Boston'],
-              [(42.346240, -71.065120), 'C Mart', '50 Herald St, Boston'],
-              [(42.351370, -71.058540), 'C Mart', '109 Lincoln St, Boston'],
-              [(42.499970, -71.194020), 'China Merchandise', '120 Cambridge St, Burlington'],
-              [(42.347490, -71.063020), 'City Fruit Company', '231 Harrison Ave, Boston'],
-              [(42.351480, -71.060210), 'Delight Corner', '34 Oxford St, Boston'],
-              [(42.298880, -71.405630), 'Formoso Asian Marketplace', '271 Worcester Rd, Framingham'],
-              [(42.460340, -70.961270), 'Full Moon Market', '63 Commercial St, Lynn'],
-              [(42.240320, -70.991930), 'Full Moon Market', '63 Commercial St, Lynn'],
-              [(42.257050, -71.808500), 'Mekong Market', '747 Main St, Worcester']],
+        "GroceryStores":
+              [[[42.35242, -71.12533], '88 Supermarket', '1 Brighton Ave, Boston'],
+              [[42.63465, -71.32739], '888 Asian Grocery', '4 Pine St, Lowell'],
+              [[42.35195, -71.06146], 'A Goomart', '15 Harrison Ave, Boston'],
+              [[42.348010, -71.062770], ' Asian Pacific Seafood Trading Co Inc', '216 Harrison Ave, Boston'],
+              [[42.346240, -71.065120], 'C Mart', '50 Herald St, Boston'],
+              [[42.351370, -71.058540], 'C Mart', '109 Lincoln St, Boston'],
+              [[42.499970, -71.194020], 'China Merchandise', '120 Cambridge St, Burlington'],
+              [[42.347490, -71.063020], 'City Fruit Company', '231 Harrison Ave, Boston'],
+              [[42.351480, -71.060210], 'Delight Corner', '34 Oxford St, Boston'],
+              [[42.298880, -71.405630], 'Formoso Asian Marketplace', '271 Worcester Rd, Framingham'],
+              [[42.460340, -70.961270], 'Full Moon Market', '63 Commercial St, Lynn'],
+              [[42.240320, -70.991930], 'Full Moon Market', '63 Commercial St, Lynn'],
+              [[42.257050, -71.808500], 'Mekong Market', '747 Main St, Worcester']],
 
-          "Cultural Centers":
-              [[(42.34871, -7106348), 'Chinese Progressive Association', '28 Ash St, Boston']]};
-              var filters = {LatinAmerican: false, EastAsian: false, Restaurants: false, GroceryStores: false, 
-              CulturalCenters: false, ImmigrationResources: false}
-
-    // var any_culture = {};
-    //     any_culture =
-    //         {“Any”:
-    //             {“Community Centers”: {
-    //                 (42.332249, -71.098244): [‘Boston Center-Youth and Families’, ’1483 Tremont St, Boston’],
-    //                 (42.340328, -71.073112): [‘Blackstone Community Center’, ’50 W Brookline St, Blackstone’],
-    //                 (42.32551, -71.0593): [‘Fenway Community Center’, ‘1282 Boston St #123, Boston’]
-    //             },
-    //         “Immigration Services”: {
-    //             (38.65265, -78.66871): [‘ACLU’, ‘211 Congress St, Boston’],
-    //             (51.10955, 0.92175): [‘Visa Service, Inc’, ‘535 Bolyston St 5th floor’]
-    //             }
-    //         }
-    //     };
+          "CommunityCenters":
+              [[[42.34871, -7106348], 'Chinese Progressive Association', '28 Ash St, Boston']]};
+              
+          var filters = {LatinAmerican: false, EastAsian: false, Restaurants: false, GroceryStores: false, 
+              CommunityCenters: false, ImmigrationResources: false}
+    
       function initAutocomplete() {
         // var map = new google.maps.Map(document.getElementById('map'), {
         //     center: {lat: -33.8688, lng: 151.2195},
@@ -373,76 +365,7 @@
  
             function toggleHeatmap() {
                 heatmap.setMap(heatmap.getMap() ? null : map);
-                for (var key in latin_america) { 
-                    var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-                    '<div id="bodyContent">'+
-                    '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                    'sandstone rock formation in the southern part of the '+
-                    'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-                    'south west of the nearest large town, Alice Springs; 450&#160;km '+
-                    '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-                    'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-                    'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-                    'Aboriginal people of the area. It has many springs, waterholes, '+
-                    'rock caves and ancient paintings. Uluru is listed as a World '+
-                    'Heritage Site.</p>'+
-                    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-                    'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-                    '(last visited June 22, 2009).</p>'+
-                    '</div>'+
-                    '</div>';
-
-                    var infowindow = new google.maps.InfoWindow({
-                        content: contentString
-                    });
-
-                    var marker = new google.maps.Marker({
-                        position: {lat: 42.35242, lng:-71.12533},
-                        map: map,
-                        title: 'Name of Store'
-                    });
-                    marker.addListener('click', function() {
-                        infowindow.open(map, marker);
-                    });
-                }
-                var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-                    '<div id="bodyContent">'+
-                    '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                    'sandstone rock formation in the southern part of the '+
-                    'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-                    'south west of the nearest large town, Alice Springs; 450&#160;km '+
-                    '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-                    'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-                    'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-                    'Aboriginal people of the area. It has many springs, waterholes, '+
-                    'rock caves and ancient paintings. Uluru is listed as a World '+
-                    'Heritage Site.</p>'+
-                    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-                    'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-                    '(last visited June 22, 2009).</p>'+
-                    '</div>'+
-                    '</div>';
-
-                var infowindow = new google.maps.InfoWindow({
-                    content: contentString
-                });
-
-                var marker = new google.maps.Marker({
-                    position: {lat: 42.35242, lng:-71.12533},
-                    map: map,
-                    title: 'Name of Store'
-                });
-                marker.addListener('click', function() {
-                    infowindow.open(map, marker);
-                });
             }
-
             function changeGradient() {
                 var gradient = [
                 'rgba(0, 255, 255, 0)',
@@ -469,6 +392,91 @@
 
             function changeOpacity() {
                 heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+            }
+
+            function changeState(thing){
+              filters[thing] = !filters[thing]
+              console.log("State changed to: " + filters[thing]);
+              if (filters['LatinAmerican']){
+                // console.log(Object.keys(latin_america).length;
+                  for(var key in latin_america) { 
+                    if(filters[key]){
+                      console.log("KEY")
+                      console.log(key);
+                      for(var i = 0; i<Object.keys(latin_america).length; i++){
+                        var unit = latin_america[key][i]
+                        // for(unit in latin_america[key]){
+                        console.log("latin_america[key]")
+                        console.log(latin_america[key])
+                        var contentString = 
+                        '<div id="content">'+'</div>'+
+                        '<div id="siteNotice">'+
+                        '<h1 id="firstHeading" class="firstHeading"><var>'+unit[1]+'</var></h1>'+
+                        '<div id="bodyContent">'+
+                        '<p><b><var>'+unit[1]+'</var></b></p>' +
+                        '<p><var>'+unit[2]+'</var></p>'+
+                        '</div>'+
+                        '</div>';
+
+                        var infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+                        
+                        console.log(unit);
+                        console.log(unit[0][0], unit[0][1]);
+
+                        var marker = new google.maps.Marker({
+                            position: {lat: unit[0][0], lng:unit[0][1]},
+                            map: map,
+                            title: unit[1]
+                        });
+                        marker.addListener('click', function() {
+                            infowindow.open(map, marker);
+                        });
+                      }
+                    }
+                  }
+                }
+                if (filters['EastAsian']){
+                // console.log(Object.keys(latin_america).length;
+                  for(var key in East_Asia) { 
+                    if(filters[key]){
+                      // console.log("KEY")
+                      // console.log(key);
+                      for(var i = 0; i<Object.keys(East_Asia).length; i++){
+                        var unit = East_Asia[key][i]
+                        // for(unit in latin_america[key]){
+                        // console.log("East_Asia[key]")
+                        // console.log(latin_america[key])
+                        var contentString = 
+                        '<div id="content">'+'</div>'+
+                        '<div id="siteNotice">'+
+                        '<h1 id="firstHeading" class="firstHeading"><var>'+unit[1]+'</var></h1>'+
+                        '<div id="bodyContent">'+
+                        '<p><b><var>'+unit[1]+'</var></b></p>' +
+                        '<p><var>'+unit[2]+'</var></p>'+
+                        '</div>'+
+                        '</div>';
+
+                        var infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+                        
+                        console.log(unit);
+                        console.log(unit[0][0], unit[0][1]);
+
+                        var marker = new google.maps.Marker({
+                            position: {lat: unit[0][0], lng:unit[0][1]},
+                            map: map,
+                            title: unit[1]
+                        });
+                        marker.addListener('click', function() {
+                            infowindow.open(map, marker);
+                        });
+                      }
+                    }
+                  }
+                }
             }
 
       // Heatmap data: 500 Points
