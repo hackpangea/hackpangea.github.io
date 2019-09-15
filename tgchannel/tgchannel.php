@@ -1,250 +1,69 @@
-<?php
-/*
-Plugin Name: TGchannel
-Plugin URI: http://ttmga.com
-Description: Telegram Channel For wordpress
-Author: S.J.Hosseini
-Version: 0.2
-Text Domain: TGchannel
-Domain Path: /languages
-*/
+{“East Asia”:
+	{“Restaurants”:
+		{(42.35151, -71.06052): [‘101 Bakery’, ’56 Beach St, Boston’],
+		(29.428350, -98.513100): [‘Bad Bad Bakery’,‘1 Lakeside Rd, Eastwood’],
+		(42.366270, -71.079200): [‘Chang Thing Tofu’, ’37 Rogers St, Cambridge’],
+		(42.365640, -71.055970): [‘Corner Cafe Bakery’, ’87 Prince St, Boston’],
+		(42.351760, -71.060980): [‘Eldo Cake House’,  ’36 Harrison Ave, Boston’],
+		(42.350870, -71.060180): [‘Happy Family Seafood’, ’11 Hudson St, unit A, Boston’],
+		(42.351100, -71.060040): [‘Hing Shing Pastry’, ’67 Beach St, Boston’],
+		(42.351520, -71.060580): [‘Ho Yuen Bakery’, ’54 Beach St, Boston’],
+		(42.301890, -71.054840): [‘Mei Sum’, ’36 Beach St, Boston’],
+		(38.65265, -78.66871): [‘Double Chin Modern Asian Restaurant’, ’86 Harrison Ave, Boston’],
+		(42.35119, -71.05984): [‘New Golden Gate Seafood’, ’66 Beach St, Boston’],
+		(42.35138, -71.06069): [‘Gourmet Dumpling House’, ’52 Beach St, Boston’],
+		(45.4260978987139, -96.410917239285): [‘The Q’, 660 Washington St, Boston’],
+		(42.351103, -71.06079): [‘Shojo’, ‘9 Tyler St, Boston’],
+		(42.350837, -71.060634): [‘Shabu Zen’, ’16 Tyler St, Boston’],
+		(42.351491, -71.060128): [‘Taiwan Cafe’, ’34 Oxford St, Boston’],
+		(42.350931, -71.0602): [‘New Jumbo Seafood Restaurant’, ‘5 Hudson St, Boston’],
+		(42.350979, -71.060478): [‘Winsor Dim Sum Cafe’, ’10 Tyler St, Boston’],
+		(42.35148, -71.060154): [‘Ching King’, ’60 Beach St, Boston’],
+		(42.350496, -71.060478): [‘Clay Pot Cafe’, ’74 Kneeland St, Boston’],
+		(42.347471, -71.062582): [‘Chinatown Cafe’, ‘262 Harrison Ave, Boston’]
+		}
+	“Grocery”:
+		{(42.35242, -71.12533): [’88 Supermarket’, ‘1 Brighton Ave, Boston’], 
+		(234,5345): [“name”, “Address”],
+		(42.63465, -71.32739): [‘888 Asian Grocery’, ‘4 Pine St, Lowell’],
+		(42.35195, -71.06146): [‘A Goodmart’, ’15 Harrison Ave, Boston’],
+		(42.348010, -71.062770): [‘Asian Pacific Seafood Trading Co Inc’,‘216 Harrison Ave, Boston’],
+		(42.346240, -71.065120): [‘C Mart’,’50 Herald St, Boston’],
+		(42.351370, -71.058540): [‘C Mart’, ‘109 Lincoln St, Boston’],
+		(42.499970, -71.194020): [‘China Merchandise’, ‘120 Cambridge St, Burlington’],
+		(42.347490, -71.063020): [‘City Fruit Company’, ‘231 Harrison Ave, Boston’],
+		(42.351480, -71.060210): [‘Delight Corner’, ’34 Oxford St, Boston’],
+		(42.298880, -71.405630): [‘Formoso Asian Marketplace’, ‘271 Worcester Rd, Framingham’],
+		(42.460340, -70.961270): [‘Full Moon Market’,’63 Commercial St, Lynn],
+		(42.240320, -70.991930): [‘Kam Man Food’, ‘219 Quincy Ave, Quincy’],
+		(42.257050, -71.808500): [‘Mekong Market’, ‘747 Main St, Worcester’],
 
 
-    define('TGchannel_PLUGIN_PATH', plugin_dir_path(__FILE__));
-    require_once ('helper.php');
+		
 
 
-//////////////////////////////////////////////////////////////////// add setting page
-    add_action('admin_menu',
-    function ()
-    {
-	add_options_page(__("Settings ", 'TGchannel') . 'TGchannel', __("Settings ", 'TGchannel') . ' TGchannel ', 'manage_options', 'TGchannel-settings', 'TGchannel_plugin_page');
-    },9);
-
-
-
-
-/////////////////////////////////////////////////////////////////// register settings
-    add_action('admin_init',
-    function ()
-     {
-	register_setting('TGchannel-settings', 'TG_Channel_link');
-	register_setting('TGchannel-settings', 'TG_Channel_name');
-	register_setting('TGchannel-settings', 'TG_Channel_postid');
-	
-	register_setting('TGchannel-settings', 'TG_Channel_Header_color');
-	register_setting('TGchannel-settings', 'TG_Channel_Footer_color');
-	register_setting('TGchannel-settings', 'TG_Channel_Header_Font_color');
-	register_setting('TGchannel-settings', 'TG_Channel_Footer_Font_color');
-	register_setting('TGchannel-settings', 'TG_Channel_Header_Font_size');
-	register_setting('TGchannel-settings', 'TG_Channel_Footer_Font_size');
-	register_setting('TGchannel-settings', 'TG_Channel_Header_Height');
-	register_setting('TGchannel-settings', 'TG_Channel_Footer_Height');	
-	register_setting('TGchannel-settings', 'TG_Channel_Body_height');
-	register_setting('TGchannel-settings', 'TG_Channel_Body_width');
-	
-	register_setting('TGchannel-settings', 'TG_Channel_background');
-	register_setting('TGchannel-settings', 'TG_Channel_background_color');
-
-	register_setting('TGchannel-settings', 'TG_Channel_body_size');	
-	
-	register_setting('TGchannel-settings', 'TG_channel_Bot_Token');
-	register_setting('TGchannel-settings', 'TG_Channel_username');
-	register_setting('TGchannel-settings', 'TG_Channel_saving_count');		 
-		 
-	
-     });
-
-
-
-///////////////////////////////////////////////////////////////// set options on activation
-
-    function TGchannel_plugin_activation()
-    {
-	if (!get_option('TG_Channel_background')){	
-    update_option( 'TG_Channel_background',plugins_url('/css/geometry.png', __FILE__));
 	}
-	if (!get_option('TG_Channel_background_color')){	
-    update_option( 'TG_Channel_background_color','#ffffff');
-	}			
-	if (!get_option('TG_Channel_Header_color')){	
-    update_option( 'TG_Channel_Header_color','#4c70db');
-	}
-	if (!get_option('TG_Channel_Footer_color')){	
-    update_option( 'TG_Channel_Footer_color','#ffffff');
-	}	
-	if (!get_option('TG_Channel_Header_Font_color')){	
-    update_option( 'TG_Channel_Header_Font_color','#ffffff');
-	}
-	if (!get_option('TG_Channel_Footer_Font_color')){	
-    update_option( 'TG_Channel_Footer_Font_color','#4c70db');
-	}
-	if (!get_option('TG_Channel_Header_Font_size')){	
-    update_option( 'TG_Channel_Header_Font_size','20px');
-	}
-	if (!get_option('TG_Channel_Footer_Font_size')){	
-    update_option( 'TG_Channel_Footer_Font_size','17px');
-	}
-	if (!get_option('TG_Channel_Header_Height')){	
-    update_option( 'TG_Channel_Header_Height','50px');
-	}
-	if (!get_option('TG_Channel_Footer_Height')){	
-    update_option( 'TG_Channel_Footer_Height','50px');
-	}
-	if (!get_option('TG_Channel_Body_height')){	
-    update_option( 'TG_Channel_Body_height','400px');
-	}
-	if (!get_option('TG_Channel_Body_width')){	
-    update_option( 'TG_Channel_Body_width','308px');
-	}
-	if (!get_option('TG_Channel_body_size')){	
-    update_option( 'TG_Channel_body_size','custom');
-	}	
-    }
-
-
-
-    register_activation_hook( __FILE__, 'TGchannel_plugin_activation' );
-
-
-///////////////////////////////////////////////////////////////// load textdomain
-    function TGchannel_plugin_textdomain()
-    {
-	load_plugin_textdomain('TGchannel', FALSE, basename(dirname(__FILE__)) . '/languages/');
-    }
-    add_action('plugins_loaded', 'TGchannel_plugin_textdomain');
 
 
 
 
 
-//////////////////////////////////////////////////////////////// add setting page link to installed plugin page
-    function TGchannel_add_settings_link($links)
-    {
-	$settings_link = '<a href="admin.php?page=TGchannel-settings">' . __('Setting', 'TGchannel') . '</a>';
-	array_push($links, $settings_link);
-	return $links;
-    }
-
-    $plugin = plugin_basename(__FILE__);
-    add_filter("plugin_action_links_$plugin", 'TGchannel_add_settings_link');
-	
-	
-	
-
-///////////////////////////////////////////////////////////// Register and load the widget
-    function tgchannel_load_widget()
-	  {
-			register_widget('tgchannel_widget');
-	  }
-    add_action('widgets_init', 'tgchannel_load_widget');
 
 
 
-//////////////////////////////////////////////////////////// add shortcode
-
-    add_shortcode('tgchannel', 'tgchannel_shortcode');
 
 
+,
+(,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
 
-/////////////////////////////////////////////////////////// load settings page
-    function TGchannel_plugin_page()
-    {
-    include('admin/settings.php');
-    }	
 
-
-/////////////////////////////////////////////////////////// load frontend script
-    function tgchannel_scripts_basic()
-	  {
-           wp_enqueue_script('jquery');
-			if (is_active_widget(false, false, 'tgchannel_widget', true))
-				{
-						wp_register_script('TGCH_load', plugins_url('/js/widgetload.js', __FILE__));
-						wp_enqueue_script('TGCH_load');
-				}
-			else
-				{
-						wp_register_script('TGCH_load', plugins_url('/js/load.js', __FILE__));
-						wp_enqueue_script('TGCH_load');
-				}
-				
-	  }
-    add_action('wp_enqueue_scripts', 'tgchannel_scripts_basic');
-	
-	
-	
-//////////////////////////////////////////////////////////// load admin scriptS
-   function tgchannel_add_admin_scripts( $hook ) {
-	  if (isset($_GET['page']) && ($_GET['page'] == 'TGchannel-settings')){  
-	    wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style(  'admincss', plugins_url('/css/admin.css', __FILE__));
-
-			
-			
-	    wp_enqueue_script('jquery');
-        wp_enqueue_media();
-		wp_enqueue_script( 'wp-color-picker');
-        wp_enqueue_script(  'adminjquer', plugins_url('/js/admin.js', __FILE__));
-		wp_enqueue_script('jquery-ui-tabs');
-	  }
-    }
-    add_action('admin_enqueue_scripts','tgchannel_add_admin_scripts',10,1);
-	
-	
-
-/////////////////////////////////////////////////////////// after update_option
-
-function tgchannel_upgrade_completed( $upgrader_object, $options ) {
- // The path to our plugin's main file
- $our_plugin = plugin_basename( __FILE__ );
- // If an update has taken place and the updated type is plugins and the plugins element exists
- if( $options['action'] == 'update' && $options['type'] == 'plugin' && isset( $options['plugins'] ) ) {
-  // Iterate through the plugins being updated and check if ours is there
-  foreach( $options['plugins'] as $plugin ) {
-   if( $plugin == $our_plugin ) {
-	if (!get_option('TG_Channel_background')){	
-    update_option( 'TG_Channel_background',plugins_url('/css/geometry.png', __FILE__));
-	}
-	if (!get_option('TG_Channel_background_color')){	
-    update_option( 'TG_Channel_background_color','#ffffff');
-	}			
-	if (!get_option('TG_Channel_Header_color')){	
-    update_option( 'TG_Channel_Header_color','#4c70db');
-	}
-	if (!get_option('TG_Channel_Footer_color')){	
-    update_option( 'TG_Channel_Footer_color','#ffffff');
-	}	
-	if (!get_option('TG_Channel_Header_Font_color')){	
-    update_option( 'TG_Channel_Header_Font_color','#ffffff');
-	}
-	if (!get_option('TG_Channel_Footer_Font_color')){	
-    update_option( 'TG_Channel_Footer_Font_color','#4c70db');
-	}
-	if (!get_option('TG_Channel_Header_Font_size')){	
-    update_option( 'TG_Channel_Header_Font_size','20px');
-	}
-	if (!get_option('TG_Channel_Footer_Font_size')){	
-    update_option( 'TG_Channel_Footer_Font_size','17px');
-	}
-	if (!get_option('TG_Channel_Header_Height')){	
-    update_option( 'TG_Channel_Header_Height','50px');
-	}
-	if (!get_option('TG_Channel_Footer_Height')){	
-    update_option( 'TG_Channel_Footer_Height','50px');
-	}
-	if (!get_option('TG_Channel_Body_height')){	
-    update_option( 'TG_Channel_Body_height','400px');
-	}
-	if (!get_option('TG_Channel_Body_width')){	
-    update_option( 'TG_Channel_Body_width','308px');
-	}
-	if (!get_option('TG_Channel_body_size')){	
-    update_option( 'TG_Channel_body_size','custom');
-	}
-   }
-  }
- }
-}
-add_action( 'upgrader_process_complete', 'tgchannel_upgrade_completed', 10, 2 );
-	
